@@ -26,12 +26,19 @@ class Category(TimeStampedModel):
     def get_list_url(self):
         return reverse_lazy('call:category_list')
 
-    # @property
-    # def get_update_url(self):
-    #     if self.pk:
-    #         kw = {'pk': self.pk}
-    #         return reverse_lazy('call:category_update', kwargs=kw)
-    #     return None
+    @property
+    def get_update_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('call:category_update', kwargs=kw)
+        return None
+
+    @property
+    def get_delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('call:category_delete', kwargs=kw)
+        return None
 
     def get_verbose_name(self):
         return self._meta.verbose_name.title()

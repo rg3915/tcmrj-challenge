@@ -15,7 +15,8 @@ category_patterns = [
     path('', v.CategoryListView.as_view(), name='category_list'),
     path('<int:pk>/', v.CategoryDetailView.as_view(), name='category_detail'),
     path('create/', v.CategoryCreateView.as_view(), name='category_create'),
-    # path('<int:pk>/update/', v.CategoryUpdateView.as_view(), name='category_update'),
+    path('<int:pk>/update/', v.CategoryUpdateView.as_view(), name='category_update'),
+    path('<int:pk>/delete/', v.CategoryDeleteView.as_view(), name='category_delete'),
 ]
 
 

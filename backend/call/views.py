@@ -1,5 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.urls import reverse_lazy
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView
+)
 
 from backend.core.mixins import ObjectModel, TotalItems
 
@@ -39,3 +46,13 @@ class CategoryDetailView(LRM, DetailView):
 class CategoryCreateView(LRM, ObjectModel, CreateView):
     model = Category
     form_class = CategoryForm
+
+
+class CategoryUpdateView(LRM, UpdateView):
+    model = Category
+    form_class = CategoryForm
+
+
+class CategoryDeleteView(LRM, DeleteView):
+    model = Category
+    success_url = reverse_lazy('call:category_list')
