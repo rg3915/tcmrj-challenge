@@ -3,7 +3,7 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from backend.core.mixins import ObjectModel, TotalItems
 
-from .forms import CallForm
+from .forms import CallForm, CategoryForm
 from .mixins import SearchCallMixin
 from .models import Call, Category
 
@@ -34,3 +34,8 @@ class CategoryListView(LRM, TotalItems, SearchCallMixin, ListView):
 
 class CategoryDetailView(LRM, DetailView):
     model = Category
+
+
+class CategoryCreateView(LRM, ObjectModel, CreateView):
+    model = Category
+    form_class = CategoryForm
