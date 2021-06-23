@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
-from backend.core.mixins import TotalItems
+from backend.core.mixins import ObjectModel, TotalItems
 
 from .forms import CallForm
 from .mixins import SearchCallMixin
@@ -13,7 +13,7 @@ class CallListView(LRM, TotalItems, SearchCallMixin, ListView):
     paginate_by = 20
 
 
-class CallCreateView(LRM, CreateView):
+class CallCreateView(LRM, ObjectModel, CreateView):
     model = Call
     form_class = CallForm
 

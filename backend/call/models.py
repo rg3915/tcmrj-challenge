@@ -55,8 +55,18 @@ class Call(TimeStampedModel):
         return reverse_lazy('call:call_detail', kwargs={'pk': self.pk})
 
     @property
+    def get_list_url(self):
+        return reverse_lazy('call:call_list')
+
+    @property
     def get_update_url(self):
         if self.pk:
             kw = {'pk': self.pk}
             return reverse_lazy('call:call_update', kwargs=kw)
         return None
+
+    def get_verbose_name(self):
+        return self._meta.verbose_name.title()
+
+    def get_verbose_name_plural(self):
+        return self._meta.verbose_name_plural.title()
