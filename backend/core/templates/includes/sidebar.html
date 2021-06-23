@@ -1,3 +1,5 @@
+{% load usergroup_tags %}
+
 <div class="sidebar">
   <nav class="sidebar-nav">
     <ul class="nav">
@@ -12,14 +14,18 @@
         <a class="nav-link" href="{% url 'call:call_list' %}">
           <i class="nav-icon icon-bubbles"></i> Chamados</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'call:category_list' %}">
-          <i class="nav-icon icon-organization"></i> Categorias</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'call:subcategory_list' %}">
-          <i class="nav-icon icon-tag"></i> Subcategorias</a>
-      </li>
+      {% if request.user|name_group == 'Gestor' %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'call:category_list' %}">
+            <i class="nav-icon icon-organization"></i> Categorias</a>
+        </li>
+      {% endif %}
+      {% if request.user|name_group == 'Gestor' %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'call:subcategory_list' %}">
+            <i class="nav-icon icon-tag"></i> Subcategorias</a>
+        </li>
+      {% endif %}
     </ul>
   </nav>
   <button class="sidebar-minimizer brand-minimizer" type="button"></button>

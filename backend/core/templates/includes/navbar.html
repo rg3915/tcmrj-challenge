@@ -13,23 +13,27 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <ul class="nav navbar-nav d-md-down-none">
-    <li class="nav-item px-3">
-      <a class="btn btn-primary" href="{% url 'call:call_create' %}">
-        Abertura de Chamado
-      </a>
-    </li>
+    {% if request.user|name_group == 'Gestor' %}
+      <li class="nav-item px-3">
+        <a class="btn btn-primary" href="{% url 'call:call_create' %}">
+          Abertura de Chamado
+        </a>
+      </li>
+    {% endif %}
     <li class="nav-item px-3">
       <a class="nav-link" href="{% url 'call:call_list' %}">
         <i class="icon-bubbles"></i>
         Chamados
       </a>
     </li>
-    <li class="nav-item px-3">
-      <a class="nav-link" href="{% url 'call:call_management' %}">
-        <i class="icon-wrench"></i>
-        Gerenciamento de Abertura de Chamados
-      </a>
-    </li>
+    {% if request.user|name_group == 'Gestor' %}
+      <li class="nav-item px-3">
+        <a class="nav-link" href="{% url 'call:call_management' %}">
+          <i class="icon-wrench"></i>
+          Gerenciamento de Abertura de Chamados
+        </a>
+      </li>
+    {% endif %}
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <!-- <li class="nav-item dropdown d-md-down-none">
