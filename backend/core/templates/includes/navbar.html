@@ -13,7 +13,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <ul class="nav navbar-nav d-md-down-none">
-    {% if request.user|name_group == 'Padrão' or request.user|name_group == 'Gestor' %}
+    {% if request.user|name_group == 'Padrão' %}
       <li class="nav-item px-3">
         <a class="btn btn-primary" href="{% url 'call:call_create' %}">
           Abertura de Chamado
