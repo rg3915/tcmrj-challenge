@@ -19,6 +19,14 @@ class CallForm(forms.ModelForm):
         if has_group(self.request.user, 'Padrão'):
             self.fields['user'].widget = forms.HiddenInput()
 
+        if has_group(self.request.user, 'Suporte'):
+            for field_name, field in self.fields.items():
+                if field_name != 'user':
+                    field.widget.attrs['readonly'] = True
+
+                if field_name in ('status', 'subcategory'):
+                    field.widget = forms.HiddenInput()
+
     def clean(self):
         self.cleaned_data = super().clean()
 
