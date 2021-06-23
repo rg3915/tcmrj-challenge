@@ -1,0 +1,17 @@
+<!-- Breadcrumb -->
+{% block breadcrumbs %}
+
+<li class="breadcrumb-item">
+  <a href="{{ object.get_list_url }}">{{ object.get_verbose_name_plural }}
+</a>
+</li>
+
+<li class="breadcrumb-item active">
+  {{ object }}
+</li>
+
+<li class="breadcrumb-item active">
+  Detalhes
+</li>
+
+{% endblock %}
