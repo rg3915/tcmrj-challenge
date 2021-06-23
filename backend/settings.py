@@ -33,6 +33,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 AUTH_USER_MODEL = 'accounts.User'
 
 DJANGO_APPS = [
+    'backend.accounts',  # <---
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
