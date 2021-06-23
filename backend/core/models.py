@@ -1,8 +1,9 @@
 import uuid
 
-from django.contrib.auth.models import User
 from django.db import models
 from localflavor.br.br_states import STATE_CHOICES
+
+from backend.accounts.models import User
 
 
 class UuidModel(models.Model):

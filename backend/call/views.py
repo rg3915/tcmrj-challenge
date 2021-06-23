@@ -25,6 +25,11 @@ class CallCreateView(LRM, ObjectModel, CreateView):
     model = Call
     form_class = CallForm
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
 
 class CallDetailView(LRM, DetailView):
     model = Call
