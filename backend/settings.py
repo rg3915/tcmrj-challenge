@@ -45,6 +45,7 @@ DJANGO_APPS = [
 THIRD_APPS = [
     'django_extensions',
     'widget_tweaks',
+    'auditlog',
 ]
 
 MY_APPS = [

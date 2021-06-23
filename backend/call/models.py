@@ -1,3 +1,4 @@
+from auditlog.registry import auditlog
 from django.db import models
 from django.urls import reverse_lazy
 
@@ -79,3 +80,6 @@ class Call(TimeStampedModel):
 
     def get_verbose_name_plural(self):
         return self._meta.verbose_name_plural.title()
+
+
+auditlog.register(Call)

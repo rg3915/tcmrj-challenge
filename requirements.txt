@@ -1,3 +1,4 @@
+auditlog3==1.0.1
 dj-database-url==0.5.0
 dj-static==0.0.6
 django-extensions==3.1.3
