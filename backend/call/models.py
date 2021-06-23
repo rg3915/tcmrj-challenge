@@ -106,6 +106,14 @@ class Call(TimeStampedModel):
         null=True,
         blank=True
     )
+    subcategory = models.ForeignKey(
+        Subcategory,
+        on_delete=models.SET_NULL,
+        verbose_name='subcategoria',
+        related_name='subcategories',
+        null=True,
+        blank=True
+    )
 
     class Meta:
         ordering = ('title',)

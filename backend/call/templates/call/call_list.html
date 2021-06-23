@@ -56,6 +56,8 @@
               <th>Descrição</th>
               <th>Atendente</th>
               <th class="text-center">Status</th>
+              <th>Categoria</th>
+              <th>Subcategoria</th>
               <th class="text-center">Ações</th>
             </tr>
           </thead>
@@ -69,7 +71,7 @@
                 </td>
                 <td>{{ object.description }}</td>
                 <td>{{ object.user.get_full_name }}</td>
-                <td>
+                <td class="text-center">
                   {% if object.status == 'a' %}
                     <span class="badge badge-success">{{ object.get_status_display }}</span>
                   {% elif object.status == 'b' %}
@@ -77,6 +79,12 @@
                   {% else %}
                     <span class="badge badge-secondary">{{ object.get_status_display }}</span>
                   {% endif %}
+                </td>
+                <td>
+                  {{ object.subcategory.category }}
+                </td>
+                <td>
+                  {{ object.subcategory }}
                 </td>
                 <!-- <td class="text-center">
                   <span class="badge badge-success">Active</span>

@@ -58,6 +58,14 @@
               <span class="float-right">{{ object.description }}</span>
             </h4>
             <hr>
+            <h4><small><span class="text-muted">Categoria</span></small>
+              <span class="float-right">{{ object.subcategory.category }}</span>
+            </h4>
+            <hr>
+            <h4><small><span class="text-muted">Subcategoria</span></small>
+              <span class="float-right">{{ object.subcategory }}</span>
+            </h4>
+            <hr>
             <h4><small><span class="text-muted">Atendente</span></small>
               <span class="float-right">{{ object.user.get_full_name }}</span>
             </h4>

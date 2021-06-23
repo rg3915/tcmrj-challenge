@@ -116,11 +116,13 @@ def create_subcategories():
 
 def get_call():
     users = User.objects.exclude(email='admin@email.com')
+    subcategories = Subcategory.objects.all()
     d = dict(
         title=u.gen_title(nb_words=7, remove_dot=True),
         description=u.gen_text(),
         status=choices(STATUS)[0][0],
-        user=choices(users)[0]
+        user=choices(users)[0],
+        subcategory=choices(subcategories)[0],
     )
     return d
 
