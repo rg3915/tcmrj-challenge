@@ -91,7 +91,7 @@
                   <span class="badge badge-success">Active</span>
                 </td> -->
                 <td class="text-center">
-                  {% if request.user|name_group == 'Gestor' or request.user|name_group == 'Suporte' %}
+                  {% if request.user|name_group != 'Padrão' %}
                     <a href="{{ object.get_update_url }}">
                       <i class="fa fa-edit"></i>
                     </a>
