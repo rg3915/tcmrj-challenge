@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse_lazy
 
 from backend.core.models import TimeStampedModel
 
@@ -15,9 +16,6 @@ class Category(TimeStampedModel):
 
     def __str__(self):
         return self.title
-
-    # def get_absolute_url(self):
-    #     return reverse_lazy('_detail', kwargs={'pk': self.pk})
 
 
 class Subcategory(TimeStampedModel):
@@ -39,9 +37,6 @@ class Subcategory(TimeStampedModel):
     def __str__(self):
         return self.title
 
-    # def get_absolute_url(self):
-    #     return reverse_lazy('_detail', kwargs={'pk': self.pk})
-
 
 class Call(TimeStampedModel):
     title = models.CharField('título', max_length=100, unique=True)
@@ -57,4 +52,4 @@ class Call(TimeStampedModel):
         return self.title
 
     # def get_absolute_url(self):
-    #     return reverse_lazy('_detail', kwargs={'pk': self.pk})
+    #     return reverse_lazy('call_detail', kwargs={'pk': self.pk})
