@@ -48,6 +48,7 @@ THIRD_APPS = [
 ]
 
 MY_APPS = [
+    'backend.core',
 ]
 
 INSTALLED_APPS = []
