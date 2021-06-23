@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -80,3 +81,8 @@ class SubcategoryUpdateView(LRM, UpdateView):
 class SubcategoryDeleteView(LRM, DeleteView):
     model = Subcategory
     success_url = reverse_lazy('call:subcategory_list')
+
+
+def call_management(request):
+    template_name = 'call/management.html'
+    return render(request, template_name)

@@ -9,6 +9,7 @@ call_patterns = [
     path('<int:pk>/', v.CallDetailView.as_view(), name='call_detail'),
     path('create/', v.CallCreateView.as_view(), name='call_create'),
     path('<int:pk>/update/', v.CallUpdateView.as_view(), name='call_update'),
+    path('management/', v.call_management, name='call_management'),
 ]
 
 category_patterns = [
