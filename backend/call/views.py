@@ -10,9 +10,9 @@ from django.views.generic import (
 
 from backend.core.mixins import ObjectModel, TotalItems
 
-from .forms import CallForm, CategoryForm
+from .forms import CallForm, CategoryForm, SubcategoryForm
 from .mixins import SearchCallMixin
-from .models import Call, Category
+from .models import Call, Category, Subcategory
 
 
 class CallListView(LRM, TotalItems, SearchCallMixin, ListView):
@@ -56,3 +56,27 @@ class CategoryUpdateView(LRM, UpdateView):
 class CategoryDeleteView(LRM, DeleteView):
     model = Category
     success_url = reverse_lazy('call:category_list')
+
+
+class SubcategoryListView(LRM, TotalItems, SearchCallMixin, ListView):
+    model = Subcategory
+    paginate_by = 20
+
+
+class SubcategoryDetailView(LRM, DetailView):
+    model = Subcategory
+
+
+class SubcategoryCreateView(LRM, ObjectModel, CreateView):
+    model = Subcategory
+    form_class = SubcategoryForm
+
+
+class SubcategoryUpdateView(LRM, UpdateView):
+    model = Subcategory
+    form_class = SubcategoryForm
+
+
+class SubcategoryDeleteView(LRM, DeleteView):
+    model = Subcategory
+    success_url = reverse_lazy('call:subcategory_list')

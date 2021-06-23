@@ -19,8 +19,19 @@ category_patterns = [
     path('<int:pk>/delete/', v.CategoryDeleteView.as_view(), name='category_delete'),
 ]
 
+subcategory_patterns = [
+    path('', v.SubcategoryListView.as_view(), name='subcategory_list'),
+    path('<int:pk>/', v.SubcategoryDetailView.as_view(), name='subcategory_detail'),
+    path('create/', v.SubcategoryCreateView.as_view(), name='subcategory_create'),
+    path('<int:pk>/update/', v.SubcategoryUpdateView.as_view(),
+         name='subcategory_update'),
+    path('<int:pk>/delete/', v.SubcategoryDeleteView.as_view(),
+         name='subcategory_delete'),
+]
+
 
 urlpatterns = [
     path('call/', include(call_patterns)),
     path('category/', include(category_patterns)),
+    path('subcategory/', include(subcategory_patterns)),
 ]

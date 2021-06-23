@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block breadcrumb %}
+  {% include "breadcrumb/_include_breadcrumb_base.html" %}
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Subcategorias
+        <span class="float-right">{{ object_list.count }} de {{ page_obj.paginator.count }} resultados ({{ total_items }} total)</span>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-auto">
+            <a class="btn btn-primary" href="{% url 'call:subcategory_create' %}">
+              <i class="fa fa-plus"></i>
+              Adicionar
+            </a>
+          </div>
+          <div class="col">
+            <form action="." method="GET">
+              <div class="row">
+                <div class="col p-ari-5">
+                  <input name="search" class="form-control mb-2" type="text" placeholder="Buscar..." />
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-success mb-2" type="submit">OK</button>
+                  <button class="btn btn-link mb-2">Limpar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- TABLE -->
+        <table class="table table-responsive-sm table-hover table-striped">
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Categoria</th>
+              <th class="text-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for object in object_list %}
+              <tr>
+                <td>
+                  <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+                </td>
+                <td>
+                  {{ object.category }}
+                </td>
+                <!-- <td class="text-center">
+                  <span class="badge badge-success">Active</span>
+                </td> -->
+                <td class="text-center">
+                  <a href="{{ object.get_update_url }}">
+                    <i class="fa fa-edit"></i>
+                  </a>
+                  <a href="{{ object.get_delete_url }}">
+                    <i class="fa fa-close no" style="padding-left:5px"></i>
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <!-- pagination -->
+        {% include "includes/pagination.html" %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
