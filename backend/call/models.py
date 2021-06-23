@@ -1,3 +1,60 @@
 from django.db import models
 
-# Create your models here.
+from backend.core.models import TimeStampedModel
+
+from .constants import STATUS
+
+
+class Category(TimeStampedModel):
+    title = models.CharField('título', max_length=100, unique=True)
+
+    class Meta:
+        ordering = ('title',)
+        verbose_name = 'categoria'
+        verbose_name_plural = 'categorias'
+
+    def __str__(self):
+        return self.title
+
+    # def get_absolute_url(self):
+    #     return reverse_lazy('_detail', kwargs={'pk': self.pk})
+
+
+class Subcategory(TimeStampedModel):
+    title = models.CharField('título', max_length=100, unique=True)
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        verbose_name='categoria',
+        related_name='subcategories',
+        null=True,
+        blank=True
+    )
+
+    class Meta:
+        ordering = ('title',)
+        verbose_name = 'subcategoria'
+        verbose_name_plural = 'subcategorias'
+
+    def __str__(self):
+        return self.title
+
+    # def get_absolute_url(self):
+    #     return reverse_lazy('_detail', kwargs={'pk': self.pk})
+
+
+class Call(TimeStampedModel):
+    title = models.CharField('título', max_length=100, unique=True)
+    description = models.TextField('descrição')
+    status = models.CharField('status', max_length=1, choices=STATUS, default='a')  # noqa E501
+
+    class Meta:
+        ordering = ('title',)
+        verbose_name = 'chamado'
+        verbose_name_plural = 'chamados'
+
+    def __str__(self):
+        return self.title
+
+    # def get_absolute_url(self):
+    #     return reverse_lazy('_detail', kwargs={'pk': self.pk})
