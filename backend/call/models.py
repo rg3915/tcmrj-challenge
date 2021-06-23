@@ -39,7 +39,7 @@ class Subcategory(TimeStampedModel):
 
 
 class Call(TimeStampedModel):
-    title = models.CharField('título', max_length=100, unique=True)
+    title = models.CharField('título', max_length=100)
     description = models.TextField('descrição')
     status = models.CharField('status', max_length=1, choices=STATUS, default='a')  # noqa E501
 
