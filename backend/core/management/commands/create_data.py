@@ -2,8 +2,10 @@ from random import choices
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
+from django.db.models import Q
 from faker import Faker
 
+from backend.accounts.models import User
 from backend.call.constants import STATUS
 from backend.call.models import Call, Category, Subcategory
 from backend.utils import utils as u
@@ -24,12 +26,25 @@ def get_user():
     return d
 
 
+def create_users():
+    User.objects.exclude(
+        Q(email='admin@email.com') |
+        Q(email='regis@email.com')
+    ).delete()
+    aux = []
+    for _ in progressbar(range(10), 'Users'):
+        data = get_user()
+        obj = User(**data)
+        aux.append(obj)
+    User.objects.bulk_create(aux)
+
+
 def data_category():
     filename = settings.BASE_DIR.joinpath('backend/fixtures/categories.csv')
     return csv_to_list(filename)
 
 
-def create_category():
+def create_categories():
     Category.objects.all().delete()
     aux_list = []
     categories = data_category()
@@ -54,7 +69,7 @@ def get_subcategory(item):
     return d
 
 
-def create_subcategory():
+def create_subcategories():
     Subcategory.objects.all().delete()
     aux_list = []
     subcategories = data_subcategory()
@@ -66,15 +81,17 @@ def create_subcategory():
 
 
 def get_call():
+    users = User.objects.exclude(email='admin@email.com')
     d = dict(
         title=u.gen_title(nb_words=7, remove_dot=True),
         description=u.gen_text(),
         status=choices(STATUS)[0][0],
+        user=choices(users)[0]
     )
     return d
 
 
-def create_call():
+def create_calls():
     Call.objects.all().delete()
     aux_list = []
     for item in progressbar(range(100), 'Call'):
@@ -89,6 +106,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.stdout.write('Create data.')
-        create_category()
-        create_subcategory()
-        create_call()
+        create_users()
+        create_categories()
+        create_subcategories()
+        create_calls()
