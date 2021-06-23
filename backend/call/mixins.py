@@ -1,10 +1,15 @@
 from django.db.models import Q
 
+from backend.utils.utils import has_group
+
 
 class SearchCallMixin:
 
     def get_queryset(self):
         queryset = super(SearchCallMixin, self).get_queryset()
+
+        if has_group(self.request.user, 'Padrão'):
+            queryset = queryset.filter(user=self.request.user)
 
         data = self.request.GET
         search = data.get('search')

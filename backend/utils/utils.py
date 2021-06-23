@@ -8,6 +8,14 @@ from faker import Faker
 fake = Faker()
 
 
+def has_group(user, group_name):
+    ''' Verifica se este usuário pertence a um grupo. '''
+    if user:
+        groups = user.groups.all().values_list('name', flat=True)
+        return True if group_name in groups else False
+    return False
+
+
 def gen_string(max_length):
     return str(''.join(choice(string.ascii_letters) for i in range(max_length)))
 

@@ -1,15 +1,9 @@
 # from backend.accounts.models import User
 from django import forms
 
+from backend.utils.utils import has_group
+
 from .models import Call, Category, Subcategory
-
-
-def has_group(user, group_name):
-    ''' Verifica se este usuário pertence a um grupo. '''
-    if user:
-        groups = user.groups.all().values_list('name', flat=True)
-        return True if group_name in groups else False
-    return False
 
 
 class CallForm(forms.ModelForm):
@@ -21,6 +15,7 @@ class CallForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
         super().__init__(*args, **kwargs)
+
         if has_group(self.request.user, 'Padrão'):
             self.fields['user'].widget = forms.HiddenInput()
 
