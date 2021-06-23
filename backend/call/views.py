@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin as LRM
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from backend.core.mixins import TotalItems
 
@@ -16,6 +16,10 @@ class CallListView(LRM, TotalItems, SearchCallMixin, ListView):
 class CallCreateView(LRM, CreateView):
     model = Call
     form_class = CallForm
+
+
+class CallDetailView(LRM, DetailView):
+    model = Call
 
 
 class CallUpdateView(LRM, UpdateView):

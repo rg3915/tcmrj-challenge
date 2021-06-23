@@ -51,8 +51,8 @@ class Call(TimeStampedModel):
     def __str__(self):
         return self.title
 
-    # def get_absolute_url(self):
-    #     return reverse_lazy('call_detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse_lazy('call:call_detail', kwargs={'pk': self.pk})
 
     @property
     def get_update_url(self):

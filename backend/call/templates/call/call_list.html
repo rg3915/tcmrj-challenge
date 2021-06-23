@@ -53,7 +53,7 @@
                 <td>{{ object.pk }}</td>
                 <td>{{ object.created|date:"d/m/Y" }}</td>
                 <td>
-                  <a href="{ object.get_absolute_url }}">{{ object.title }}</a>
+                  <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
                 </td>
                 <td>{{ object.description }}</td>
                 <td>
