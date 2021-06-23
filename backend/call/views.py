@@ -30,3 +30,7 @@ class CallUpdateView(LRM, UpdateView):
 class CategoryListView(LRM, TotalItems, SearchCallMixin, ListView):
     model = Category
     paginate_by = 20
+
+
+class CategoryDetailView(LRM, DetailView):
+    model = Category

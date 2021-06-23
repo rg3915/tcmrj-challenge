@@ -19,6 +19,26 @@ class Category(TimeStampedModel):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse_lazy('call:category_detail', kwargs={'pk': self.pk})
+
+    @property
+    def get_list_url(self):
+        return reverse_lazy('call:category_list')
+
+    # @property
+    # def get_update_url(self):
+    #     if self.pk:
+    #         kw = {'pk': self.pk}
+    #         return reverse_lazy('call:category_update', kwargs=kw)
+    #     return None
+
+    def get_verbose_name(self):
+        return self._meta.verbose_name.title()
+
+    def get_verbose_name_plural(self):
+        return self._meta.verbose_name_plural.title()
+
 
 class Subcategory(TimeStampedModel):
     title = models.CharField('título', max_length=100, unique=True)

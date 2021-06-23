@@ -13,7 +13,7 @@ call_patterns = [
 
 category_patterns = [
     path('', v.CategoryListView.as_view(), name='category_list'),
-    # path('<int:pk>/', v.CategoryDetailView.as_view(), name='category_detail'),
+    path('<int:pk>/', v.CategoryDetailView.as_view(), name='category_detail'),
     # path('create/', v.CategoryCreateView.as_view(), name='category_create'),
     # path('<int:pk>/update/', v.CategoryUpdateView.as_view(), name='category_update'),
 ]
