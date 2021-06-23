@@ -5,7 +5,7 @@ from backend.core.mixins import ObjectModel, TotalItems
 
 from .forms import CallForm
 from .mixins import SearchCallMixin
-from .models import Call
+from .models import Call, Category
 
 
 class CallListView(LRM, TotalItems, SearchCallMixin, ListView):
@@ -25,3 +25,8 @@ class CallDetailView(LRM, DetailView):
 class CallUpdateView(LRM, UpdateView):
     model = Call
     form_class = CallForm
+
+
+class CategoryListView(LRM, TotalItems, SearchCallMixin, ListView):
+    model = Category
+    paginate_by = 20
