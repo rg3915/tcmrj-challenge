@@ -9,7 +9,13 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('email', 'first_name', 'last_name', 'is_admin')
+    list_display = (
+        'email',
+        'first_name',
+        'last_name',
+        'custom_group',
+        'is_admin',
+    )
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
@@ -36,6 +42,13 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions',)
+
+    def custom_group(self, obj):
+        """
+        get group, separate by comma, and display empty string if user has no group
+        """
+        return ','.join([g.name for g in obj.groups.all()]) if obj.groups.count() else ''
+    custom_group.short_description = 'Grupo'
 
 
 admin.site.register(User, UserAdmin)

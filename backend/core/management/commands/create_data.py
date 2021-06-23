@@ -1,6 +1,7 @@
 from random import choices
 
 from django.conf import settings
+from django.contrib.auth.models import Group
 from django.core.management.base import BaseCommand
 from django.db.models import Q
 from faker import Faker
@@ -13,6 +14,18 @@ from backend.utils.progress_bar import progressbar
 from backend.utils.read_csv import csv_to_list
 
 fake = Faker()
+
+
+def create_groups():
+    Group.objects.all().delete()
+    groups = ['Gestor', 'Suporte', 'Padrão']
+    aux_list = []
+
+    for group in progressbar(groups, 'Groups'):
+        obj = Group(name=group)
+        aux_list.append(obj)
+
+    Group.objects.bulk_create(aux_list)
 
 
 def get_user():
@@ -31,12 +44,29 @@ def create_users():
         Q(email='admin@email.com') |
         Q(email='regis@email.com')
     ).delete()
-    aux = []
+    aux_list = []
+
     for _ in progressbar(range(10), 'Users'):
         data = get_user()
         obj = User(**data)
-        aux.append(obj)
-    User.objects.bulk_create(aux)
+        aux_list.append(obj)
+
+    User.objects.bulk_create(aux_list)
+
+
+def add_group_on_user():
+    users = User.objects.exclude(
+        Q(email='admin@email.com') |
+        Q(email='regis@email.com')
+    )
+    groups = Group.objects.all()
+
+    for user in progressbar(users, 'Add Group on Users'):
+        group = choices(groups)[0]
+        user.groups.add(group)
+
+    user = User.objects.get(email='regis@email.com')
+    user.groups.add(Group.objects.get(name='Gestor'))
 
 
 def data_category():
@@ -48,10 +78,12 @@ def create_categories():
     Category.objects.all().delete()
     aux_list = []
     categories = data_category()
+
     for item in progressbar(categories, 'Category'):
         data = {'title': item['title']}
         obj = Category(**data)
         aux_list.append(obj)
+
     Category.objects.bulk_create(aux_list)
 
 
@@ -73,10 +105,12 @@ def create_subcategories():
     Subcategory.objects.all().delete()
     aux_list = []
     subcategories = data_subcategory()
+
     for item in progressbar(subcategories, 'Subcategory'):
         data = get_subcategory(item)
         obj = Subcategory(**data)
         aux_list.append(obj)
+
     Subcategory.objects.bulk_create(aux_list)
 
 
@@ -94,10 +128,12 @@ def get_call():
 def create_calls():
     Call.objects.all().delete()
     aux_list = []
+
     for item in progressbar(range(100), 'Call'):
         data = get_call()
         obj = Call(**data)
         aux_list.append(obj)
+
     Call.objects.bulk_create(aux_list)
 
 
@@ -106,7 +142,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.stdout.write('Create data.')
+        create_groups()
         create_users()
+        add_group_on_user()
         create_categories()
         create_subcategories()
         create_calls()
