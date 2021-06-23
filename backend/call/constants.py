@@ -2,7 +2,7 @@ OPEN = 'a'
 IN_PROGRESS = 'b'
 CONCLUDED = 'c'
 STATUS = (
-    (OPEN, 'aberto'),
-    (IN_PROGRESS, 'em andamento'),
-    (CONCLUDED, 'concluído'),
+    (OPEN, 'Aberto'),
+    (IN_PROGRESS, 'Em andamento'),
+    (CONCLUDED, 'Concluído'),
 )
