@@ -1,4 +1,6 @@
 {% load static %}
+{% load usergroup_tags %}
+
 <header class="app-header navbar">
   <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
     <span class="navbar-toggler-icon"></span>
@@ -230,6 +232,9 @@
         </a>
       </div>
     </li> -->
+    <li class="nav-item dropdown d-md-down-none">
+      {{ request.user.get_full_name }} - {{ request.user|name_group }}
+    </li>
     <li class="nav-item dropdown d-md-down-none">
       <a class="nav-link" href="{% url 'logout' %}">
         <i class="icon-logout"></i>
