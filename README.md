@@ -6,7 +6,7 @@ Aplicação em Django para abertura de chamados
 
 * [Python 3.9.4](https://www.python.org/)
 * [Django 3.2.4](https://www.djangoproject.com/)
-* [Django Ninja](https://www.django-rest-framework.org/)
+* [Django Ninja 0.13.2](https://django-ninja.rest-framework.com/)
 * [Bootstrap 4.0](https://getbootstrap.com/)
 * [jQuery 3.4.1](https://jquery.com/)
 
