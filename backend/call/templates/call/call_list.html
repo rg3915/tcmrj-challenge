@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load usergroup_tags %}
 
 {% block breadcrumb %}
   {% include "breadcrumb/_include_breadcrumb_base.html" %}
@@ -90,9 +91,11 @@
                   <span class="badge badge-success">Active</span>
                 </td> -->
                 <td class="text-center">
-                  <a href="{{ object.get_update_url }}">
-                    <i class="fa fa-edit"></i>
-                  </a>
+                  {% if request.user|name_group == 'Gestor' or request.user|name_group == 'Suporte' %}
+                    <a href="{{ object.get_update_url }}">
+                      <i class="fa fa-edit"></i>
+                    </a>
+                  {% endif %}
                 </td>
               </tr>
             {% endfor %}

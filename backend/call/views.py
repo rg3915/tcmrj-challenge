@@ -12,7 +12,7 @@ from django.views.generic import (
 from backend.core.mixins import ObjectModel, TotalItems
 
 from .forms import CallForm, CategoryForm, SubcategoryForm
-from .mixins import SearchCallMixin
+from .mixins import FormKwargsMixin, SearchCallMixin
 from .models import Call, Category, Subcategory
 
 
@@ -21,21 +21,16 @@ class CallListView(LRM, TotalItems, SearchCallMixin, ListView):
     paginate_by = 20
 
 
-class CallCreateView(LRM, ObjectModel, CreateView):
-    model = Call
-    form_class = CallForm
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs.update({'request': self.request})
-        return kwargs
-
-
 class CallDetailView(LRM, DetailView):
     model = Call
 
 
-class CallUpdateView(LRM, UpdateView):
+class CallCreateView(LRM, ObjectModel, FormKwargsMixin, CreateView):
+    model = Call
+    form_class = CallForm
+
+
+class CallUpdateView(LRM, FormKwargsMixin, UpdateView):
     model = Call
     form_class = CallForm
 

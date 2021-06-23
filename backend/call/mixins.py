@@ -24,3 +24,11 @@ class SearchCallMixin:
             queryset = queryset.filter(status=status)
 
         return queryset
+
+
+class FormKwargsMixin:
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
