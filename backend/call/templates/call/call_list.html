@@ -54,6 +54,7 @@
               <th>Data</th>
               <th>Título</th>
               <th>Descrição</th>
+              <th>Atendente</th>
               <th class="text-center">Status</th>
               <th class="text-center">Ações</th>
             </tr>
@@ -67,6 +68,7 @@
                   <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
                 </td>
                 <td>{{ object.description }}</td>
+                <td>{{ object.user.get_full_name }}</td>
                 <td>
                   {% if object.status == 'a' %}
                     <span class="badge badge-success">{{ object.get_status_display }}</span>

@@ -26,7 +26,7 @@ class SubcategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Call)
 class CallAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'status')
+    list_display = ('__str__', 'user', 'status')
     search_fields = ('title', 'description')
     list_filter = ('status',)
     date_hierarchy = 'created'
