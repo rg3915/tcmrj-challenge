@@ -35,10 +35,10 @@ python manage.py runserver
 
 ## Docs swagger
 
-http://0.0.0.0:8000/api/v1/docs
+http://localhost:8000/api/v1/docs
 
 
-POST: Add to call
+POST: Adicionar chamado
 
 ```
 {
@@ -60,4 +60,13 @@ Rode o comando
 ```
 pytest
 ```
+
+## Models
+
+```
+python manage.py graph_models -a -g -o img/models.png  # or
+python manage.py graph_models -e -g -l dot -o img/model.png accounts call
+```
+
+![img/models.png](img/models.png)
 
