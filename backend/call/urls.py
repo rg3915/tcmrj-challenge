@@ -27,6 +27,7 @@ subcategory_patterns = [
     path('create/', v.SubcategoryCreateView.as_view(), name='subcategory_create'),
     path('<int:pk>/update/', v.SubcategoryUpdateView.as_view(), name='subcategory_update'),  # noqa E501
     path('<int:pk>/delete/', v.SubcategoryDeleteView.as_view(), name='subcategory_delete'),  # noqa E501
+    path('choices/ajax/', v.subcategory_choices_ajax, name='subcategory_choices_ajax'),  # noqa E501
 ]
 
 

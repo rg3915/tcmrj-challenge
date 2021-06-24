@@ -7,10 +7,23 @@ from .models import Call, Category, Subcategory
 
 
 class CallForm(forms.ModelForm):
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        label='Categoria',
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
 
     class Meta:
         model = Call
-        fields = '__all__'
+        fields = (
+            'title',
+            'description',
+            'status',
+            'user',
+            'category',
+            'subcategory',
+        )
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')

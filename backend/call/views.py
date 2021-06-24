@@ -91,3 +91,15 @@ class SubcategoryDeleteView(LRM, DeleteView):
 def call_management(request):
     template_name = 'call/management.html'
     return render(request, template_name)
+
+
+def subcategory_choices_ajax(request):
+    template_name = 'call/includes/subcategory_choices.html'
+    category_id = request.GET.get('category_id')
+    object_list = Subcategory.objects.all()
+
+    if category_id:
+        object_list = object_list.filter(category=category_id)
+
+    context = {'object_list': object_list}
+    return render(request, template_name, context)

@@ -61,5 +61,22 @@
         $("label[for='id_subcategory']").css("display", "none")
       }
     });
+
+    $('#id_category').on('change', function() {
+      let url = '/call/subcategory/choices/ajax/?category_id=' +  this.value
+      $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(response) {
+          $('#id_subcategory').html(response);
+        },
+        error: function(xhr) {
+          // body... xhr.statusText + xhr.responseText
+        },
+        complete: function() {
+          // body...
+        }
+      })
+    });
   </script>
 {% endblock js %}
