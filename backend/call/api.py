@@ -20,6 +20,7 @@ class CallSchemaIn(Schema):
     description: str
     status: str = 'a'
     user_id: int
+    created_by_id: int
     subcategory_id: int
 
 
@@ -51,11 +52,15 @@ def create_call(request, payload: CallSchemaIn):
     description = payload.description
     status = payload.status
     user_id = payload.user_id
+    created_by_id = payload.created_by_id
     subcategory_id = payload.subcategory_id
 
     # Instance models
     # Get user
     user = get_object_or_404(User, id=user_id)
+
+    # Get created_by
+    created_by = get_object_or_404(User, id=created_by_id)
 
     # Get subcategory
     subcategory = get_object_or_404(Subcategory, id=subcategory_id)
@@ -66,6 +71,7 @@ def create_call(request, payload: CallSchemaIn):
         description=description,
         status=status,
         user=user,
+        created_by=created_by,
         subcategory=subcategory,
     )
 

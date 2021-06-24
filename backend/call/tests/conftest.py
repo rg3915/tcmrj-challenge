@@ -41,6 +41,7 @@ def call(user, subcategory):
         "description": "lorem ipsum dollor",
         "status": "a",
         "user_id": user.id,
+        "created_by_id": user.id,
         "subcategory_id": subcategory.id
     }
     return data

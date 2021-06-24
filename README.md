@@ -49,6 +49,7 @@ POST: Adicionar chamado
   "description": "Descrição",
   "status": "a",
   "user_id": 1,
+  "created_by_id": 1,
   "subcategory_id": 1
 }
 ```
