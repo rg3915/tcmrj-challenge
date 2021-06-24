@@ -20,6 +20,7 @@ class CallForm(forms.ModelForm):
             'title',
             'description',
             'status',
+            'created_by',
             'user',
             'category',
             'subcategory',
@@ -31,21 +32,25 @@ class CallForm(forms.ModelForm):
 
         if has_group(self.request.user, 'Padrão'):
             self.fields['user'].widget = forms.HiddenInput()
+            self.fields['created_by'].widget = forms.HiddenInput()
             self.fields['status'].widget.attrs['hidden'] = True
 
         if has_group(self.request.user, 'Suporte'):
             for field_name, field in self.fields.items():
-                if field_name != 'user':
+                if field_name in ('title', 'description'):
                     field.widget.attrs['readonly'] = True
 
-                if field_name in ('status', 'subcategory'):
+                if field_name in ('status', 'category', 'subcategory', 'created_by'):
                     field.widget.attrs['hidden'] = True
+
+        if has_group(self.request.user, 'Gestor'):
+            self.fields['created_by'].widget.attrs['hidden'] = True
 
     def clean(self):
         self.cleaned_data = super().clean()
 
-        if not self.cleaned_data.get('user'):
-            self.cleaned_data['user'] = self.request.user
+        if not self.cleaned_data.get('created_by'):
+            self.cleaned_data['created_by'] = self.request.user
 
         return self.cleaned_data
 

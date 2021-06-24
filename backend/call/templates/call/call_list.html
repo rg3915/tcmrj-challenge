@@ -58,6 +58,7 @@
               <th>Título</th>
               <th>Descrição</th>
               <th>Atendente</th>
+              <th>Criado por</th>
               <th class="text-center">Status</th>
               <th>Categoria</th>
               <th>Subcategoria</th>
@@ -74,6 +75,7 @@
                 </td>
                 <td>{{ object.description }}</td>
                 <td>{{ object.user.get_full_name }}</td>
+                <td>{{ object.created_by.get_full_name }}</td>
                 <td class="text-center">
                   {% if object.status == 'a' %}
                     <span class="badge badge-success">{{ object.get_status_display }}</span>

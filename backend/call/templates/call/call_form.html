@@ -57,8 +57,16 @@
         $("label[for='id_status']").css("display", "none")
       }
 
+      if ($('#id_category').is(":hidden")) {
+        $("label[for='id_category']").css("display", "none")
+      }
+
       if ($('#id_subcategory').is(":hidden")) {
         $("label[for='id_subcategory']").css("display", "none")
+      }
+
+      if ($('#id_created_by').is(":hidden")) {
+        $("label[for='id_created_by']").css("display", "none")
       }
     });
 

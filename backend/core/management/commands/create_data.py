@@ -122,6 +122,7 @@ def get_call():
         description=u.gen_text(),
         status=choices(STATUS)[0][0],
         user=choices(users)[0],
+        created_by=choices(users)[0],
         subcategory=choices(subcategories)[0],
     )
     return d

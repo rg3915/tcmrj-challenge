@@ -3,7 +3,7 @@ from django.db import models
 from django.urls import reverse_lazy
 
 from backend.accounts.models import User
-from backend.core.models import TimeStampedModel
+from backend.core.models import CreatedBy, TimeStampedModel
 
 from .constants import STATUS
 
@@ -94,7 +94,7 @@ class Subcategory(TimeStampedModel):
         return self._meta.verbose_name_plural.title()
 
 
-class Call(TimeStampedModel):
+class Call(CreatedBy, TimeStampedModel):
     title = models.CharField('título', max_length=100)
     description = models.TextField('descrição')
     status = models.CharField('status', max_length=1, choices=STATUS, default='a')  # noqa E501
