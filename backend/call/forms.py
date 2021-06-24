@@ -18,6 +18,7 @@ class CallForm(forms.ModelForm):
 
         if has_group(self.request.user, 'Padrão'):
             self.fields['user'].widget = forms.HiddenInput()
+            self.fields['status'].widget.attrs['hidden'] = True
 
         if has_group(self.request.user, 'Suporte'):
             for field_name, field in self.fields.items():
