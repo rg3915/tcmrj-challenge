@@ -12,6 +12,7 @@ router = Router()
 
 CallSchema = create_schema(Call)
 CategorySchema = create_schema(Category)
+SubcategorySchema = create_schema(Subcategory)
 
 
 class CallSchemaIn(Schema):
@@ -24,6 +25,11 @@ class CallSchemaIn(Schema):
 
 class CategorySchemaIn(Schema):
     title: str
+
+
+class SubcategorySchemaIn(Schema):
+    title: str
+    category_id: int
 
 
 @router.get("/calls", response=List[CallSchema])
@@ -116,4 +122,38 @@ def update_category(request, id: int, payload: CategorySchemaIn):
 def delete_category(request, id: int):
     category = get_object_or_404(Category, id=id)
     category.delete()
+    return {"success": True}
+
+
+@router.get("/subcategories", response=List[SubcategorySchema])
+def list_subcategories(request):
+    qs = Subcategory.objects.all()
+    return qs
+
+
+@router.get("/subcategories/{id}", response=SubcategorySchema)
+def get_subcategory(request, id: int):
+    subcategory = get_object_or_404(Subcategory, id=id)
+    return subcategory
+
+
+@router.post("/subcategories", response=SubcategorySchema)
+def create_subcategory(request, payload: SubcategorySchemaIn):
+    subcategory = Subcategory.objects.create(**payload.dict())
+    return subcategory
+
+
+@router.put("/subcategories/{id}", response=SubcategorySchema)
+def update_subcategory(request, id: int, payload: SubcategorySchemaIn):
+    subcategory = get_object_or_404(Subcategory, id=id)
+    for attr, value in payload.dict().items():
+        setattr(subcategory, attr, value)
+    subcategory.save()
+    return subcategory
+
+
+@router.delete("/subcategories/{id}")
+def delete_subcategory(request, id: int):
+    subcategory = get_object_or_404(Subcategory, id=id)
+    subcategory.delete()
     return {"success": True}

@@ -95,3 +95,55 @@ def test_delete_category_response(client, category):
     url = '/api/v1/call/categories/1'
     response = client.delete(url)
     assert response.json() == {"success": True}
+
+
+@pytest.mark.django_db
+def test_create_subcategory(client, category):
+    url = '/api/v1/call/subcategories'
+    data = {
+        "title": "Ar-condicionado",
+        "category_id": category.id
+    }
+    response = client.post(url, data, content_type='application/json')
+    assert response.status_code == HTTPStatus.OK
+
+
+@pytest.mark.django_db
+def test_list_subcategories_status_code(client):
+    url = '/api/v1/call/subcategories'
+    response = client.get(url)
+    assert response.status_code == HTTPStatus.OK
+
+
+@pytest.mark.django_db
+def test_update_subcategory(client, category):
+    url = '/api/v1/call/subcategories'
+    data = {
+        "title": "Ar-condicionado",
+        "category_id": category.id
+    }
+    client.post(url, data, content_type='application/json')
+
+    url = '/api/v1/call/subcategories/1'
+    response = client.put(url, data, content_type='application/json')
+    assert response.status_code == HTTPStatus.OK
+
+
+@pytest.mark.django_db
+def test_delete_subcategory(client, subcategory):
+    url = '/api/v1/call/subcategories'
+    client.post(url, subcategory, content_type='application/json')
+
+    url = '/api/v1/call/subcategories/1'
+    response = client.delete(url)
+    assert response.status_code == HTTPStatus.OK
+
+
+@pytest.mark.django_db
+def test_delete_subcategory_response(client, subcategory):
+    url = '/api/v1/call/subcategories'
+    client.post(url, subcategory, content_type='application/json')
+
+    url = '/api/v1/call/subcategories/1'
+    response = client.delete(url)
+    assert response.json() == {"success": True}
