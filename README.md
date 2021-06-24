@@ -33,3 +33,31 @@ python manage.py test
 python manage.py runserver
 ```
 
+## Docs swagger
+
+http://0.0.0.0:8000/api/v1/docs
+
+
+POST: Add to call
+
+```
+{
+  "title": "Título",
+  "description": "Descrição",
+  "status": "a",
+  "user_id": 1,
+  "subcategory_id": 1
+}
+```
+
+![img/docs.png](img/docs.png)
+
+
+## pytest
+
+Rode o comando
+
+```
+pytest
+```
+
