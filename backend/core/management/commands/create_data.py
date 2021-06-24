@@ -131,7 +131,7 @@ def create_calls():
     Call.objects.all().delete()
     aux_list = []
 
-    for item in progressbar(range(100), 'Call'):
+    for item in progressbar(range(200), 'Call'):
         data = get_call()
         obj = Call(**data)
         aux_list.append(obj)
