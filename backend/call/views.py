@@ -35,6 +35,11 @@ class CallUpdateView(LRM, FormKwargsMixin, UpdateView):
     form_class = CallForm
 
 
+class CallDeleteView(LRM, DeleteView):
+    model = Call
+    success_url = reverse_lazy('call:call_list')
+
+
 class CategoryListView(LRM, TotalItems, SearchCallMixin, ListView):
     model = Category
     paginate_by = 20

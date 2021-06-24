@@ -98,6 +98,11 @@
                       <i class="fa fa-edit"></i>
                     </a>
                   {% endif %}
+                  {% if request.user|name_group == 'Gestor' %}
+                    <a href="{{ object.get_delete_url }}">
+                      <i class="fa fa-close no" style="padding-left:5px"></i>
+                    </a>
+                  {% endif %}
                 </td>
               </tr>
             {% endfor %}

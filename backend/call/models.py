@@ -137,6 +137,13 @@ class Call(TimeStampedModel):
             return reverse_lazy('call:call_update', kwargs=kw)
         return None
 
+    @property
+    def get_delete_url(self):
+        if self.pk:
+            kw = {'pk': self.pk}
+            return reverse_lazy('call:call_delete', kwargs=kw)
+        return None
+
     def get_verbose_name(self):
         return self._meta.verbose_name.title()
 
