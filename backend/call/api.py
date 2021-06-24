@@ -6,11 +6,12 @@ from ninja.orm import create_schema
 
 from backend.accounts.models import User
 
-from .models import Call, Subcategory
+from .models import Call, Category, Subcategory
 
 router = Router()
 
 CallSchema = create_schema(Call)
+CategorySchema = create_schema(Category)
 
 
 class CallSchemaIn(Schema):
@@ -19,6 +20,10 @@ class CallSchemaIn(Schema):
     status: str = 'a'
     user_id: int
     subcategory_id: int
+
+
+class CategorySchemaIn(Schema):
+    title: str
 
 
 @router.get("/calls", response=List[CallSchema])
@@ -77,4 +82,38 @@ def update_call(request, id: int, payload: CallSchemaIn):
 def delete_call(request, id: int):
     call = get_object_or_404(Call, id=id)
     call.delete()
+    return {"success": True}
+
+
+@router.get("/categories", response=List[CategorySchema])
+def list_categories(request):
+    qs = Category.objects.all()
+    return qs
+
+
+@router.get("/categories/{id}", response=CategorySchema)
+def get_category(request, id: int):
+    category = get_object_or_404(Category, id=id)
+    return category
+
+
+@router.post("/categories", response=CategorySchema)
+def create_category(request, payload: CategorySchemaIn):
+    category = Category.objects.create(**payload.dict())
+    return category
+
+
+@router.put("/categories/{id}", response=CategorySchema)
+def update_category(request, id: int, payload: CategorySchemaIn):
+    category = get_object_or_404(Category, id=id)
+    for attr, value in payload.dict().items():
+        setattr(category, attr, value)
+    category.save()
+    return category
+
+
+@router.delete("/categories/{id}")
+def delete_category(request, id: int):
+    category = get_object_or_404(Category, id=id)
+    category.delete()
     return {"success": True}
