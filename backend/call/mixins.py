@@ -18,6 +18,12 @@ class SearchCallMixin:
         if search:
             queryset = queryset.filter(
                 Q(title__icontains=search) |
+                Q(user__first_name__icontains=search) |
+                Q(user__last_name__icontains=search) |
+                Q(user__email__icontains=search) |
+                Q(created_by__first_name__icontains=search) |
+                Q(created_by__last_name__icontains=search) |
+                Q(created_by__email__icontains=search) |
                 Q(description__icontains=search)
             )
         if status:
