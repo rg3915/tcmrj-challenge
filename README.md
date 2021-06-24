@@ -17,6 +17,8 @@ Aplicação em Django para abertura de chamados
 * Ative o virtualenv.
 * Instale as dependências.
 * Rode as migrações.
+* Crie um super usuário.
+* Crie os dados para teste local.
 * Rode os testes.
 * Rode a aplicação.
 
@@ -29,6 +31,7 @@ pip install -r requirements.txt
 python contrib/env_gen.py
 python manage.py migrate
 python manage.py createsuperuser
+python manage.py create_data
 python manage.py test
 python manage.py runserver
 ```
