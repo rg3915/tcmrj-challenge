@@ -25,7 +25,7 @@ class CallForm(forms.ModelForm):
                     field.widget.attrs['readonly'] = True
 
                 if field_name in ('status', 'subcategory'):
-                    field.widget = forms.HiddenInput()
+                    field.widget.attrs['hidden'] = True
 
     def clean(self):
         self.cleaned_data = super().clean()
