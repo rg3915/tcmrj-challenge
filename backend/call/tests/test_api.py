@@ -7,7 +7,7 @@ import pytest
 def test_create_call(client, call):
     url = '/api/v1/call/calls'
     response = client.post(url, call, content_type='application/json')
-    assert response.status_code == HTTPStatus.OK
+    assert response.status_code == HTTPStatus.CREATED
 
 
 @pytest.mark.django_db
@@ -34,7 +34,7 @@ def test_delete_call(client, call):
 
     url = '/api/v1/call/calls/1'
     response = client.delete(url)
-    assert response.status_code == HTTPStatus.OK
+    assert response.status_code == HTTPStatus.NO_CONTENT
 
 
 @pytest.mark.django_db
@@ -44,7 +44,7 @@ def test_delete_call_response(client, call):
 
     url = '/api/v1/call/calls/1'
     response = client.delete(url)
-    assert response.json() == {"success": True}
+    assert response.content == b''
 
 
 @pytest.mark.django_db
@@ -54,7 +54,7 @@ def test_create_category(client):
         "title": "Ar-condicionado"
     }
     response = client.post(url, data, content_type='application/json')
-    assert response.status_code == HTTPStatus.OK
+    assert response.status_code == HTTPStatus.CREATED
 
 
 @pytest.mark.django_db
@@ -84,7 +84,7 @@ def test_delete_category(client, category):
 
     url = '/api/v1/call/categories/1'
     response = client.delete(url)
-    assert response.status_code == HTTPStatus.OK
+    assert response.status_code == HTTPStatus.NO_CONTENT
 
 
 @pytest.mark.django_db
@@ -94,7 +94,7 @@ def test_delete_category_response(client, category):
 
     url = '/api/v1/call/categories/1'
     response = client.delete(url)
-    assert response.json() == {"success": True}
+    assert response.content == b''
 
 
 @pytest.mark.django_db
@@ -105,7 +105,7 @@ def test_create_subcategory(client, category):
         "category_id": category.id
     }
     response = client.post(url, data, content_type='application/json')
-    assert response.status_code == HTTPStatus.OK
+    assert response.status_code == HTTPStatus.CREATED
 
 
 @pytest.mark.django_db
@@ -136,7 +136,7 @@ def test_delete_subcategory(client, subcategory):
 
     url = '/api/v1/call/subcategories/1'
     response = client.delete(url)
-    assert response.status_code == HTTPStatus.OK
+    assert response.status_code == HTTPStatus.NO_CONTENT
 
 
 @pytest.mark.django_db
@@ -146,4 +146,4 @@ def test_delete_subcategory_response(client, subcategory):
 
     url = '/api/v1/call/subcategories/1'
     response = client.delete(url)
-    assert response.json() == {"success": True}
+    assert response.content == b''

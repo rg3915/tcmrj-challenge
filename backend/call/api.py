@@ -45,7 +45,7 @@ def get_call(request, id: int):
     return call
 
 
-@router.post("/calls", response=CallSchema)
+@router.post("/calls", response={201: CallSchema})
 def create_call(request, payload: CallSchemaIn):
     # Get params
     title = payload.title
@@ -78,7 +78,7 @@ def create_call(request, payload: CallSchemaIn):
     # Save data
     call = Call.objects.create(**data)
 
-    return call
+    return 201, call
 
 
 @router.put("/calls/{id}", response=CallSchema)
@@ -90,11 +90,11 @@ def update_call(request, id: int, payload: CallSchemaIn):
     return call
 
 
-@router.delete("/calls/{id}")
+@router.delete("/calls/{id}", response={204: None})
 def delete_call(request, id: int):
     call = get_object_or_404(Call, id=id)
     call.delete()
-    return {"success": True}
+    return 204, None
 
 
 @router.get("/categories", response=List[CategorySchema])
@@ -109,10 +109,10 @@ def get_category(request, id: int):
     return category
 
 
-@router.post("/categories", response=CategorySchema)
+@router.post("/categories", response={201: CategorySchema})
 def create_category(request, payload: CategorySchemaIn):
     category = Category.objects.create(**payload.dict())
-    return category
+    return 201, category
 
 
 @router.put("/categories/{id}", response=CategorySchema)
@@ -124,11 +124,11 @@ def update_category(request, id: int, payload: CategorySchemaIn):
     return category
 
 
-@router.delete("/categories/{id}")
+@router.delete("/categories/{id}", response={204: None})
 def delete_category(request, id: int):
     category = get_object_or_404(Category, id=id)
     category.delete()
-    return {"success": True}
+    return 204, None
 
 
 @router.get("/subcategories", response=List[SubcategorySchema])
@@ -143,10 +143,10 @@ def get_subcategory(request, id: int):
     return subcategory
 
 
-@router.post("/subcategories", response=SubcategorySchema)
+@router.post("/subcategories", response={201: SubcategorySchema})
 def create_subcategory(request, payload: SubcategorySchemaIn):
     subcategory = Subcategory.objects.create(**payload.dict())
-    return subcategory
+    return 201, subcategory
 
 
 @router.put("/subcategories/{id}", response=SubcategorySchema)
@@ -158,8 +158,8 @@ def update_subcategory(request, id: int, payload: SubcategorySchemaIn):
     return subcategory
 
 
-@router.delete("/subcategories/{id}")
+@router.delete("/subcategories/{id}", response={204: None})
 def delete_subcategory(request, id: int):
     subcategory = get_object_or_404(Subcategory, id=id)
     subcategory.delete()
-    return {"success": True}
+    return 204, None
